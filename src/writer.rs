@@ -1,3 +1,6 @@
+use crate::task::Task;
+use crate::util::New;
+
 pub trait FileWriter {
     fn write(&self, file_name : &str, tasks: Vec<Task>);
 }
