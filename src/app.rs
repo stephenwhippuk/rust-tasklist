@@ -58,12 +58,13 @@ impl App {
                         },
                         Command::Exit => {
                             self.writer.write(FILE_NAME, &self.tasks);
+                            self.console.write("Goodbye");
                             break;
                         }
                     }
                 },
                 Err(e) => {
-                    println!("{}", e);
+                    self.console.write(&format!("{}", e));
                 }
             }
         }
@@ -146,6 +147,11 @@ mod tests {
             .in_sequence(&mut seq)
             .return_const(());
 
+        console.expect_write()
+            .times(1)
+            .with(eq("Goodbye"))
+            .in_sequence(&mut seq)
+            .return_const(());
 
         // perform the actual test
         
